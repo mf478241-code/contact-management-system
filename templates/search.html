@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Search Contact</h2>
+
+<form method="POST">
+    <input
+        type="text"
+        name="keyword"
+        placeholder="Search by name"
+        class="form-control"
+    >
+
+    <button class="btn btn-primary mt-2">
+        Search
+    </button>
+</form>
+
+<hr>
+
+{% if contacts %}
+
+<table class="table table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for contact in contacts %}
+        <tr>
+            <td>{{ contact.id }}</td>
+            <td>{{ contact.name }}</td>
+            <td>{{ contact.phone }}</td>
+            <td>{{ contact.email }}</td>
+            <td>{{ contact.address }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+
+<div class="alert alert-danger mt-3">
+    No contact found.
+</div>
+
+{% endif %}
+
+{% endblock %}

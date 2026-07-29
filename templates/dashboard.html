@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-3">
+        <div class="stat-card blue">
+            <h2>{{ total_contacts }}</h2>
+            <p>Total Contacts</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card green">
+            <h2>{{ added_today }}</h2>
+            <p>Added Today</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card orange">
+            <h2>{{ updated }}</h2>
+            <p>Updated</p>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="stat-card red">
+            <h2>{{ deleted }}</h2>
+            <p>Deleted</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="card mt-4 shadow">
+
+    <div class="card-header bg-white">
+        <h4 class="mb-0">Recent Contacts</h4>
+    </div>
+
+    <div class="card-body">
+
+        {% if recent_contacts %}
+
+        <table class="table table-hover align-middle">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for contact in recent_contacts %}
+
+                <tr>
+
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.phone }}</td>
+
+                    <td>
+
+                       <a href="{{ url_for('edit_contact', contact_id=contact.id) }}"
+   class="btn btn-primary btn-sm">
+   Edit
+</a>
+
+                       <a href="{{ url_for('delete_contact', contact_id=contact.id) }}"
+   class="btn btn-danger btn-sm"
+   onclick="return confirm('Delete this contact?')">
+   Delete
+</a>
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="alert alert-info">
+            No contacts available.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
