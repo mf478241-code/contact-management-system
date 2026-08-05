@@ -8,7 +8,45 @@
 
     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
 
-        <h3>All Contacts</h3>
+    <h3>All Contacts</h3>
+
+    <div class="d-flex gap-2">
+
+        <form method="GET" action="/contacts">
+
+            <select
+                class="form-select"
+                name="sort"
+                onchange="this.form.submit()">
+
+                <option value="az"
+                {% if sort_by=="az" %}selected{% endif %}>
+                    Name (A-Z)
+                </option>
+
+                <option value="za"
+                {% if sort_by=="za" %}selected{% endif %}>
+                    Name (Z-A)
+                </option>
+
+                <option value="new"
+                {% if sort_by=="new" %}selected{% endif %}>
+                    Newest First
+                </option>
+
+                <option value="old"
+                {% if sort_by=="old" %}selected{% endif %}>
+                    Oldest First
+                </option>
+
+            </select>
+
+        </form>
+
+        <a href="/export" class="btn btn-success">
+            <i class="fa-solid fa-file-csv"></i>
+            Export
+        </a>
 
         <a href="/add-contact" class="btn btn-light">
             <i class="fa-solid fa-user-plus"></i>
@@ -17,6 +55,9 @@
 
     </div>
 
+</div>
+
+</div>
     <div class="card-body">
 
         <table class="table table-bordered table-hover">
